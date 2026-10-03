@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Boyfriend's Day Scrapbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffd6e3;--bg2:#fff1b8;--ink:#4a1d3f;--pink:#ff5c8a;--mint:#8fe3c8;--sun:#ffd23f;--sky:#8ec5ff;--paper:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#ffd6e3;--bg2:#fff1b8}}
+:root[data-theme="dark"]{--bg:#ffd6e3;--bg2:#fff1b8}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:'Fredoka',system-ui,sans-serif;background:var(--bg);background-image:radial-gradient(var(--paper) 2px,transparent 2.5px),linear-gradient(160deg,var(--bg),var(--bg2));background-size:26px 26px,100% 100%;overflow-x:hidden}
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.hearts i{position:absolute;bottom:-40px;font-style:normal;animation:up linear infinite;opacity:.7}
+@keyframes up{to{transform:translateY(-110vh) rotate(40deg)}}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes wob{50%{transform:rotate(6deg)}}
+@media (prefers-reduced-motion:reduce){.hearts{display:none}*{animation:none!important}}
+main{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:24px 16px 120px}
+.page{display:none;animation:pop .45s}
+.page.on{display:block}
+h1,h2{margin:0;text-align:center;line-height:1.05}
+h1{font-size:clamp(40px,10vw,84px);color:var(--pink);text-shadow:4px 4px 0 var(--sun)}
+h2{font-size:clamp(30px,6vw,48px);color:var(--pink);text-shadow:3px 3px 0 var(--sun);margin-bottom:22px}
+.hand{font-family:'Caveat',cursive,sans-serif}
+.cover{text-align:center;padding-top:30px}
+.cover .big{font-size:110px;display:inline-block;animation:wob 2s infinite}
+.cover p{font-family:'Caveat',cursive;font-size:32px;margin:14px 0}
+.badge{display:inline-block;background:var(--ink);color:#fff;border-radius:999px;padding:6px 18px;transform:rotate(-3deg);margin-top:10px}
+.wall{display:flex;flex-wrap:wrap;justify-content:center;gap:34px 28px}
+.pol{background:var(--paper);width:250px;padding:12px 12px 8px;border-radius:6px;box-shadow:5px 6px 0 rgba(74,29,63,.25);position:relative;transform:rotate(var(--r,-2deg));transition:transform .2s}
+.pol:hover{transform:rotate(0) scale(1.05)}
+.pol::before{content:"";position:absolute;top:-12px;left:50%;width:80px;height:24px;margin-left:-40px;background:var(--c,var(--sun));opacity:.85;transform:rotate(-5deg)}
+.pol:nth-child(3n+2){--c:var(--mint)}.pol:nth-child(3n){--c:var(--sky)}
+.slot{aspect-ratio:1;background:#fff0f5;border:0;border-radius:4px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--pink);font-weight:700;overflow:hidden;padding:0}
+.slot img{width:100%;height:100%;object-fit:cover}
+.cap{font-family:'Caveat',cursive;font-size:27px;font-weight:700;text-align:center;min-height:36px;margin-top:6px}
+.stk{position:absolute;font-size:38px;pointer-events:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{border-radius:22px;padding:20px;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);font-size:20px;transform:rotate(var(--r,0deg))}
+.card b{display:block;font-size:34px}
+.k1{background:var(--sun)}.k2{background:var(--mint)}.k3{background:var(--sky)}.k4{background:#ffb3c8}
+.letter{max-width:560px;margin:30px auto 0;background:#fff;border:3px dashed var(--pink);border-radius:18px;padding:22px;font-family:'Caveat',cursive;font-size:28px;line-height:1.3;transform:rotate(-1deg)}
+.quiz{max-width:560px;margin:0 auto;background:#fff;border:3px solid var(--ink);border-radius:26px;box-shadow:8px 8px 0 var(--ink);padding:24px;text-align:center}
+.q{font-size:26px;font-weight:700;margin:6px 0 16px}
+.opt{display:block;width:100%;margin:10px 0;padding:12px;font:inherit;font-size:20px;border:3px solid var(--ink);border-radius:16px;background:var(--bg2);color:var(--ink);cursor:pointer}
+.opt:hover{background:var(--sun)}
+.opt.good{background:var(--mint)}.opt.bad{background:#ffb3b3}
+.fb{min-height:32px;font-family:'Caveat',cursive;font-size:28px;margin-top:6px}
+.score{font-size:90px;font-weight:700;color:var(--pink)}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;align-items:center;gap:14px;padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.85)}
+.btn{font:inherit;font-weight:700;font-size:20px;background:var(--pink);color:#fff;border:3px solid var(--ink);border-radius:999px;padding:8px 22px;box-shadow:3px 3px 0 var(--ink);cursor:pointer}
+.btn:disabled{opacity:.35;cursor:default}
+.btn:focus-visible,.opt:focus-visible,.slot:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.dots{display:flex;gap:8px}.dots span{width:12px;height:12px;border-radius:50%;background:#e9b6c8;border:2px solid var(--ink)}.dots span.on{background:var(--pink);transform:scale(1.3)}
+.again{margin-top:14px}
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts" aria-hidden="true"></div>
+<main>
+
+<!-- PAGE 1: COVER -->
+<section class="page on">
+  <div class="cover">
+    <div class="big">💌</div>
+    <h1>Happy Boyfriend's Day Mere Lotimoor k chaddu!</h1>
+    <p>Aage aage dekho or kya kya bnaya apke liye</p>
+    <div class="badge hand" style="font-size:28px">From: Your Malkin💖</div>
+    <p>Tap Next to turn the page ➜</p>
+  </div>
+</section>
+
+<!-- PAGE 2: PHOTOS -->
+<section class="page">
+  <h2>Us, being us 📸</h2>
+  <div class="wall" id="wall1"></div>
+</section>
+
+<!-- PAGE 3: REASONS -->
+<section class="page">
+  <h2>Reasons I love you 💘</h2>
+  <div class="grid">
+    <div class="card k1" style="--r:-2deg"><b>💋</b><span>Tum meri sari batein mante ho</span></div>
+    <div class="card k2" style="--r:1.5deg"><b>😋</b><span>Kyuki tum chatpate ho</span></div>
+    <div class="card k3" style="--r:-1deg"><b>😗</b><span>Or koi jhel nhi payega</span></div>
+    <div class="card k4" style="--r:2deg"><b>💋</b><span>Tumhari lene ki firak me hu</span></div>
+  </div>
+  <div class="letter">Dear Babyyy, thank you for every laugh, every hug and every ordinary day that feels special with you. I love you more than words (and codes) can say. 💖</div>
+</section>
+
+<!-- PAGE 4: MORE PHOTOS -->
+<section class="page">
+  <h2>More memories 🎞️</h2>
+  <div class="wall" id="wall2"></div>
+</section>
+
+<!-- PAGE 5: QUIZ -->
+<section class="page">
+  <h2>How well do you know us? 🧠</h2>
+  <div class="quiz" id="quiz"></div>
+</section>
+
+<!-- PAGE 6: FINALE -->
+<section class="page">
+  <div class="cover">
+    <div class="big">🎉</div>
+    <h1>I love you!</h1>
+    <p>Thank you for being my person. Now come get your real gift 💋🎁</p>
+    <button class="btn" id="burst">Tap for hearts 💖</button>
+  </div>
+</section>
+</main>
+
+<nav>
+  <button class="btn" id="prev">⬅ Back</button>
+  <div class="dots" id="dots" aria-hidden="true"></div>
+  <button class="btn" id="next">Next ➜</button>
+</nav>
+
+<script>
+// ===== QUIZ DATA =====
+const QUIZ=[
+ ["Where did we have our first date?",["The park","A cafe","The movies","Somewhere else"],1],
+ ["What is my favorite thing to eat with you?",["Pizza","Pasta","Ice cream","Momos"],3],
+ ["Why do you love me?",["Sunder huu","Chatpati hu","Big boobies","Smjhdar hu","All of above"],2],
+ ["Mai tumhari kya hu?",["Joru/Malkin","Friend","Girlfriend","Temporary bahu"],0],
+ ["What do I love most about you?",["Ji hazurii krna","Ragebait krna","Batmizi krni","All of it!"],0]
+];
+
+// ===== IMAGE CONFIGURATION (UPDATED TO DIRECT ROOT PATHS) =====
+const photosPage1 = [
+  { src: "photo1.jpg", cap: "Our first date" },
+  { src: "photo2.jpg", cap: "I don’t say it enough, bt I’m really happy it’s u." },
+  { src: "photo3.jpg", cap: "hope we always stay this stupidly comfortable with each other" },
+  { src: "photo4.jpg", cap: "my favorite pictures of us" }
+];
+
+const photosPage2 = [
+  { src: "photo5.jpg", cap: "our first trip" },
+  { src: "photo6.jpg", cap: "chaotic us" },
+  { src: "photo7.jpg", cap: "Suarruuuuuuuu" },
+  { src: "photo8.jpg", cap: "my favorite human" }
+];
+
+// hearts background
+const hb=document.getElementById('hearts'),em=['💖','💗','💕','✨','🌸','💛'];
+for(let i=0;i<16;i++){const h=document.createElement('i');h.textContent=em[i%em.length];h.style.left=Math.random()*100+'%';h.style.fontSize=(16+Math.random()*26)+'px';h.style.animationDuration=(9+Math.random()*10)+'s';h.style.animationDelay=(-Math.random()*15)+'s';hb.appendChild(h)}
+
+// build photo walls
+const rots=[-3,2,-1.5,3];
+function buildWall(wallId, photos) {
+  const wall = document.getElementById(wallId);
+  photos.forEach((item, i) => {
+    const d = document.createElement('div');
+    d.className = 'pol';
+    d.style.setProperty('--r', rots[i % 4] + 'deg');
+    d.innerHTML = `
+      <div class="slot has">
+        <img src="${item.src}" alt="Our photo">
+      </div>
+      <div class="cap">${item.cap}</div>
+      <span class="stk" style="right:-10px;bottom:-12px">${em[i % em.length]}</span>
+    `;
+    wall.appendChild(d);
+  });
+}
+
+buildWall('wall1', photosPage1);
+buildWall('wall2', photosPage2);
+
+// pages
+const pages=[...document.querySelectorAll('.page')],dots=document.getElementById('dots'),prev=document.getElementById('prev'),next=document.getElementById('next');
+let cur=0;pages.forEach(()=>dots.appendChild(document.createElement('span')));
+function go(i){cur=Math.max(0,Math.min(pages.length-1,i));pages.forEach((p,j)=>p.classList.toggle('on',j===cur));[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===cur));prev.disabled=cur===0;next.disabled=cur===pages.length-1;window.scrollTo(0,0)}
+prev.onclick=()=>go(cur-1);next.onclick=()=>go(cur+1);go(0);
+document.addEventListener('keydown',e=>{if(e.target.isContentEditable)return;if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
+
+// confetti hearts
+function burst(){for(let i=0;i<24;i++){const h=document.createElement('i');h.textContent=em[i%em.length];h.style.cssText='position:fixed;z-index:9;font-style:normal;pointer-events:none;left:50%;top:60%;font-size:'+(20+Math.random()*24)+'px;transition:transform 1.2s ease-out,opacity 1.2s;';document.body.appendChild(h);requestAnimationFrame(()=>{h.style.transform='translate('+((Math.random()-.5)*600)+'px,'+(-Math.random()*500)+'px) rotate('+Math.random()*360+'deg)';h.style.opacity=0});setTimeout(()=>h.remove(),1300)}}
+document.getElementById('burst').onclick=burst;
+
+// quiz
+const qz=document.getElementById('quiz');let qi=0,sc=0;
+function show(){
+  if(qi>=QUIZ.length){const msg=sc===QUIZ.length?"Smjhdar hoo 🤔":sc>=QUIZ.length/2?"Suar kahi kaa":"Why don't you love me 😭";
+    qz.innerHTML='<div>Your score</div><div class="score">'+sc+'/'+QUIZ.length+'</div><div class="fb">'+msg+'</div><button class="btn again" id="re">Play again 🔁</button>';
+    document.getElementById('re').onclick=()=>{qi=0;sc=0;show()};if(sc>=QUIZ.length/2)burst();return}
+  const [q,o,a]=QUIZ[qi];
+  qz.innerHTML='<div>Question '+(qi+1)+' of '+QUIZ.length+'</div><div class="q"></div><div id="o"></div><div class="fb" id="fb"></div>';
+  qz.querySelector('.q').textContent=q;
+  const box=document.getElementById('o'),fb=document.getElementById('fb');
+  o.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;
+    b.onclick=()=>{[...box.children].forEach((x,j)=>{x.disabled=true;if(j===a)x.classList.add('good')});
+      if(i===a){sc++;fb.textContent='Yesss! 💖';burst()}else{b.classList.add('bad');fb.textContent='Oops! Not quite 🙈'}
+      setTimeout(()=>{qi++;show()},1300)};
+    box.appendChild(b)});
+}
+show();
+</script>
+</body>
+</html>
